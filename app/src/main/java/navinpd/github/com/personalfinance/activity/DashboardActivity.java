@@ -7,12 +7,14 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,7 @@ import navinpd.github.com.personalfinance.R;
 import navinpd.github.com.personalfinance.fragment.CreditFragment;
 import navinpd.github.com.personalfinance.fragment.DebitFragment;
 import navinpd.github.com.personalfinance.fragment.DetailFragment;
+import navinpd.github.com.personalfinance.fragment.EnterAmountFragment;
 import navinpd.github.com.personalfinance.fragment.SummaryFragment;
 
 public class DashboardActivity extends AppCompatActivity {
@@ -29,19 +32,27 @@ public class DashboardActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private FloatingActionButton fab;
+    private FrameLayout mainFrame;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+        mainFrame = (FrameLayout) findViewById(R.id.main_frame);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                EnterAmountFragment amountFrag = new EnterAmountFragment();
+                fragmentTransaction.add(R.id.main_frame, amountFrag);
+                fragmentTransaction.commit();
+
+
             }
         });
 
