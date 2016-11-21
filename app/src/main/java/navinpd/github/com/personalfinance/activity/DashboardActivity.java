@@ -2,12 +2,10 @@ package navinpd.github.com.personalfinance.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,14 +14,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 import java.util.ArrayList;
 import java.util.List;
 
 import navinpd.github.com.personalfinance.R;
 import navinpd.github.com.personalfinance.fragment.CreditFragment;
-import navinpd.github.com.personalfinance.fragment.DebitFragment;
+import navinpd.github.com.personalfinance.fragment.DebitActivity;
 import navinpd.github.com.personalfinance.fragment.DetailFragment;
-import navinpd.github.com.personalfinance.fragment.EnterAmountFragment;
 import navinpd.github.com.personalfinance.fragment.SummaryFragment;
 
 public class DashboardActivity extends AppCompatActivity {
@@ -38,6 +37,7 @@ public class DashboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_dashboard);
 
         mainFrame = (FrameLayout) findViewById(R.id.main_frame);
@@ -46,11 +46,11 @@ public class DashboardActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                EnterAmountFragment amountFrag = new EnterAmountFragment();
-                fragmentTransaction.add(R.id.main_frame, amountFrag);
-                fragmentTransaction.commit();
+//                FragmentManager fragmentManager = getSupportFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                EnterAmountFragment amountFrag = new EnterAmountFragment();
+//                fragmentTransaction.add(R.id.main_frame, amountFrag);
+//                fragmentTransaction.commit();
 
 
             }
@@ -93,7 +93,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new DebitFragment(), "DEBIT");
+//        adapter.addFragment(new DebitActivity(), "DEBIT");
         adapter.addFragment(new CreditFragment(), "CREDIT");
         adapter.addFragment(new SummaryFragment(), "SUMMARY");
         adapter.addFragment(new DetailFragment(), "DETAIL");

@@ -21,6 +21,6 @@ public class SummaryFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_input, container, false);
+        return inflater.inflate(R.layout.activity_input_data, container, false);
     }
 }
